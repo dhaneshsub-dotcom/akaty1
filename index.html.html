@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AKATY Vacuum Cleaner — An Inventor's Field Notebook</title>
+<meta name="description" content="The AKATY Vacuum Cleaner — a handmade cardboard invention. See what's inside, what it's made of, and how it works." />
+
+<!-- ============================================================
+     AKATY VACUUM CLEANER — showcase site
+     To edit the inventor's name, look for  data-edit="inventor"  below.
+     Photos live in the /images folder (see README for the file names).
+     ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#f3faee;
+    --paper-line:#d5ead0;
+    --green:#2fb457;
+    --green-deep:#1c8140;
+    --red:#e23b3b;
+    --red-deep:#b31f1f;
+    --kraft:#cb9c63;
+    --kraft-deep:#9a6d38;
+    --ink:#20261f;
+    --ink-soft:#4e5a4b;
+    --blue:#2f56c9;
+    --tape:linear-gradient(120deg,#ff5a5a 0%,#e23b3b 30%,#ff8a8a 42%,#c81f1f 60%,#ff6b6b 78%,#d62b2b 100%);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:"Nunito",system-ui,sans-serif;
+    color:var(--ink);
+    background-color:var(--paper);
+    background-image:
+      linear-gradient(var(--paper-line) 1px,transparent 1px),
+      linear-gradient(90deg,var(--paper-line) 1px,transparent 1px);
+    background-size:26px 26px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block}
+  a{color:var(--green-deep)}
+
+  .wrap{width:min(1060px,92vw);margin-inline:auto}
+
+  /* ---------- eyebrow / labels ---------- */
+  .tag{
+    font-family:"Space Mono",monospace;
+    font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{padding:64px 0 40px;position:relative;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+  .hero .tag{color:var(--green-deep)}
+  .wordmark{
+    font-family:"Fredoka",sans-serif;font-weight:700;
+    font-size:clamp(3.6rem,11vw,7.2rem);line-height:.92;
+    letter-spacing:-.01em;margin:.12em 0 .05em;
+    color:var(--ink);
+  }
+  .wordmark span{color:var(--green-deep)}
+  .subtitle{
+    font-family:"Fredoka",sans-serif;font-weight:500;
+    font-size:clamp(1.2rem,3.4vw,1.9rem);color:var(--red-deep);
+    margin:0 0 18px;
+  }
+  .lede{font-size:1.08rem;max-width:34ch;color:var(--ink-soft);margin:0 0 26px}
+  .credit-chip{
+    display:inline-flex;align-items:center;gap:9px;
+    background:#fff;border:2px solid var(--ink);border-radius:40px;
+    padding:7px 16px 7px 10px;font-family:"Space Mono",monospace;
+    font-size:.8rem;box-shadow:3px 3px 0 var(--ink);
+  }
+  .credit-chip .dot{width:16px;height:16px;border-radius:50%;background:var(--red);border:2px solid var(--ink)}
+
+  /* spinning brush motif in hero */
+  .brush-spin{width:26px;height:26px;flex:none}
+  .brush-spin .rot{transform-origin:13px 13px;animation:spin 2.6s linear infinite}
+
+  /* ---------- taped photo ---------- */
+  .snap{
+    position:relative;background:#fff;padding:12px 12px 44px;
+    border-radius:3px;box-shadow:0 12px 26px rgba(30,50,20,.16);
+    transform:rotate(var(--rot,-2deg));transition:transform .25s ease,box-shadow .25s ease;
+  }
+  .snap:hover{transform:rotate(0deg) translateY(-4px);box-shadow:0 18px 34px rgba(30,50,20,.22)}
+  .snap::before{
+    content:"";position:absolute;top:-15px;left:50%;transform:translateX(-50%) rotate(-1.5deg);
+    width:120px;height:30px;background:var(--tape);
+    background-size:12px 100%;opacity:.92;
+    box-shadow:0 2px 5px rgba(0,0,0,.18);
+    border-radius:2px;
+  }
+  .snap .frame{
+    aspect-ratio:3/4;background:
+      repeating-linear-gradient(45deg,#e9dcc2 0 14px,#e2d2b3 14px 28px);
+    border-radius:2px;overflow:hidden;display:flex;align-items:center;justify-content:center;
+  }
+  .snap .frame img{width:100%;height:100%;object-fit:cover}
+  .snap.wide .frame{aspect-ratio:4/3}
+  .snap .cap{
+    position:absolute;left:0;right:0;bottom:12px;text-align:center;
+    font-family:"Space Mono",monospace;font-size:.74rem;color:var(--ink-soft);
+  }
+  /* placeholder note shown until a real photo is dropped in */
+  .ph{padding:18px;text-align:center;font-family:"Space Mono",monospace;
+      font-size:.72rem;color:var(--kraft-deep);line-height:1.5}
+  .ph b{color:var(--red-deep)}
+
+  /* ---------- section shell ---------- */
+  .band{padding:58px 0;border-top:3px dashed var(--kraft)}
+  .band-head{display:flex;align-items:baseline;gap:16px;margin-bottom:30px;flex-wrap:wrap}
+  .num{
+    font-family:"Space Mono",monospace;font-weight:700;font-size:1rem;
+    color:#fff;background:var(--green-deep);border-radius:8px;
+    padding:4px 10px;flex:none;box-shadow:2px 2px 0 var(--ink);
+  }
+  .band-head h2{
+    font-family:"Fredoka",sans-serif;font-weight:600;
+    font-size:clamp(1.7rem,4.6vw,2.6rem);margin:0;line-height:1;
+  }
+
+  /* ---------- how it works ---------- */
+  .how{display:grid;grid-template-columns:1.35fr .65fr;gap:36px;align-items:center}
+  .diagram{
+    background:#fff;border:3px solid var(--ink);border-radius:16px;
+    box-shadow:6px 6px 0 var(--kraft);padding:14px;
+  }
+  .steps{list-style:none;margin:0;padding:0;counter-reset:s}
+  .steps li{
+    counter-increment:s;position:relative;padding:12px 0 12px 46px;
+    border-bottom:1px dashed var(--paper-line);
+  }
+  .steps li:last-child{border-bottom:0}
+  .steps li::before{
+    content:counter(s);position:absolute;left:0;top:11px;
+    width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;
+    font-family:"Fredoka",sans-serif;font-weight:600;
+    display:grid;place-items:center;border:2px solid var(--ink);
+  }
+  .steps b{font-family:"Fredoka",sans-serif;font-weight:600}
+
+  /* ---------- compartments ---------- */
+  .parts{display:grid;grid-template-columns:repeat(2,1fr);gap:34px}
+  .part{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:start}
+  .part .snap{--rot:-3deg}
+  .part:nth-child(even) .snap{--rot:2.5deg}
+  .part .snap .frame{aspect-ratio:3/4}
+  .part h3{
+    font-family:"Fredoka",sans-serif;font-weight:600;font-size:1.22rem;margin:2px 0 6px;
+  }
+  .part .kind{
+    display:inline-block;font-family:"Space Mono",monospace;font-size:.66rem;
+    text-transform:uppercase;letter-spacing:.12em;background:var(--paper);
+    border:1.5px solid var(--kraft);border-radius:20px;padding:2px 9px;margin-bottom:8px;color:var(--kraft-deep);
+  }
+  .part p{margin:0;font-size:.98rem;color:var(--ink-soft)}
+
+  /* ---------- materials ---------- */
+  .mat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 34px}
+  .mat{
+    display:flex;align-items:flex-start;gap:12px;padding:11px 0;
+    border-bottom:1px dashed var(--paper-line);
+  }
+  .mat .box{
+    flex:none;width:24px;height:24px;border:2.5px solid var(--ink);border-radius:6px;
+    background:#fff;display:grid;place-items:center;margin-top:2px;
+  }
+  .mat .box svg{width:16px;height:16px}
+  .mat .name{font-family:"Fredoka",sans-serif;font-weight:500}
+  .mat .role{font-family:"Space Mono",monospace;font-size:.72rem;color:var(--ink-soft);display:block;margin-top:-2px}
+
+  /* ---------- behind the scenes ---------- */
+  .bts{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 40px;padding-top:6px}
+  .bts .snap:nth-child(3n+1){--rot:-3deg}
+  .bts .snap:nth-child(3n+2){--rot:1.5deg}
+  .bts .snap:nth-child(3n){--rot:3deg}
+  .bts .snap .frame{aspect-ratio:3/4}
+
+  /* ---------- meet the makers ---------- */
+  .makers-photo{max-width:660px;margin-inline:auto}
+  .makers-note{
+    text-align:center;max-width:46ch;margin:26px auto 0;color:var(--ink-soft);
+    font-family:"Fredoka",sans-serif;font-weight:500;font-size:1.15rem;
+  }
+
+  /* ---------- footer ---------- */
+  footer{
+    margin-top:20px;padding:40px 0 60px;border-top:3px solid var(--ink);
+    background:var(--green);color:#fff;
+  }
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  footer .fm{font-family:"Fredoka",sans-serif;font-weight:600;font-size:1.5rem}
+  footer .fn{font-family:"Space Mono",monospace;font-size:.8rem;opacity:.92}
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* ---------- responsive ---------- */
+  @media(max-width:860px){
+    .hero-grid{grid-template-columns:1fr;gap:30px}
+    .hero .art{max-width:340px;margin-inline:auto}
+    .how{grid-template-columns:1fr;gap:26px}
+    .parts{grid-template-columns:1fr}
+    .mat-grid{grid-template-columns:1fr}
+    .bts{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(max-width:520px){
+    .part{grid-template-columns:120px 1fr;gap:14px}
+    .bts{grid-template-columns:1fr 1fr}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .brush-spin .rot{animation:none}
+    .reveal{transition:none;opacity:1;transform:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="tag">Inventor's Field Notebook · Model No. AKATY-01</p>
+      <h1 class="wordmark">AK<span>AT</span>Y</h1>
+      <p class="subtitle">The Cardboard Vacuum Cleaner</p>
+      <p class="lede">A real, working little sweeper built by hand from a recycled box, a battery, a motor, and a lot of glitter tape. Flip the switch and the brush starts to spin.</p>
+      <span class="credit-chip">
+        <span class="dot"></span>
+        Built by <b data-edit="inventor">&nbsp;[ your inventor's name ]</b>
+        <svg class="brush-spin" viewBox="0 0 26 26" aria-hidden="true">
+          <g class="rot">
+            <circle cx="13" cy="13" r="6" fill="none" stroke="#20261f" stroke-width="2"/>
+            <g stroke="#e23b3b" stroke-width="2.4" stroke-linecap="round">
+              <line x1="13" y1="1" x2="13" y2="5"/><line x1="13" y1="21" x2="13" y2="25"/>
+              <line x1="1" y1="13" x2="5" y2="13"/><line x1="21" y1="13" x2="25" y2="13"/>
+              <line x1="4.6" y1="4.6" x2="7.4" y2="7.4"/><line x1="18.6" y1="18.6" x2="21.4" y2="21.4"/>
+              <line x1="21.4" y1="4.6" x2="18.6" y2="7.4"/><line x1="7.4" y1="18.6" x2="4.6" y2="21.4"/>
+            </g>
+          </g>
+        </svg>
+      </span>
+    </div>
+    <div class="art">
+      <figure class="snap wide" style="--rot:2deg">
+        <div class="frame">
+          <img src="images/finished.jpg" alt="The finished AKATY vacuum cleaner"
+               onerror="this.style.display='none';this.closest('.frame').insertAdjacentHTML('beforeend','&lt;div class=&quot;ph&quot;&gt;PHOTO SLOT&lt;br&gt;drop &lt;b&gt;finished.jpg&lt;/b&gt;&lt;br&gt;in /images&lt;/div&gt;')">
+        </div>
+        <figcaption class="cap">AKATY, fully assembled</figcaption>
+      </figure>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ==================== HOW IT WORKS ==================== -->
+<section class="band">
+  <div class="wrap reveal">
+    <div class="band-head">
+      <span class="num">01</span>
+      <h2>How it works</h2>
+    </div>
+    <div class="how">
+      <div class="diagram">
+        <!-- Annotated blueprint cross-section -->
+        <svg viewBox="0 0 820 470" role="img" aria-label="Cutaway diagram of the AKATY vacuum showing battery, switch, motor and spinning brush roller">
+          <defs>
+            <marker id="arw" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+              <path d="M0,0 L7,3 L0,6 Z" fill="#20261f"/>
+            </marker>
+          </defs>
+
+          <!-- box body -->
+          <rect x="150" y="120" width="470" height="230" rx="12"
+                fill="#e7d3ad" stroke="#9a6d38" stroke-width="4"/>
+          <rect x="150" y="120" width="470" height="230" rx="12"
+                fill="none" stroke="#2fb457" stroke-width="10" opacity=".28"/>
+
+          <!-- battery -->
+          <rect x="330" y="165" width="150" height="52" rx="7" fill="#1c8140" stroke="#20261f" stroke-width="3"/>
+          <rect x="480" y="180" width="12" height="22" rx="2" fill="#20261f"/>
+          <text x="405" y="197" text-anchor="middle" font-family="Space Mono, monospace" font-size="16" fill="#fff">AA 1.5V</text>
+
+          <!-- switch (mounted on outside wall) -->
+          <rect x="118" y="150" width="34" height="52" rx="5" fill="#20261f"/>
+          <rect x="125" y="158" width="20" height="36" rx="3" fill="#e23b3b"/>
+          <text x="135" y="182" text-anchor="middle" font-family="Space Mono, monospace" font-size="13" fill="#fff">I/O</text>
+
+          <!-- motor -->
+          <rect x="352" y="250" width="86" height="54" rx="9" fill="#c9ccce" stroke="#20261f" stroke-width="3"/>
+          <circle cx="352" cy="277" r="10" fill="#8a8f92" stroke="#20261f" stroke-width="3"/>
+          <text x="398" y="282" text-anchor="middle" font-family="Space Mono, monospace" font-size="13" fill="#20261f">MOTOR</text>
+
+          <!-- brush roller -->
+          <line x1="180" y1="330" x2="330" y2="330" stroke="#9a6d38" stroke-width="8" stroke-linecap="round"/>
+          <g class="rollerbristles">
+            <g stroke="#e23b3b" stroke-width="4" stroke-linecap="round">
+              <line x1="205" y1="330" x2="205" y2="352"/><line x1="205" y1="330" x2="205" y2="308"/>
+              <line x1="230" y1="330" x2="242" y2="349"/><line x1="230" y1="330" x2="218" y2="311"/>
+              <line x1="255" y1="330" x2="255" y2="353"/><line x1="255" y1="330" x2="255" y2="307"/>
+              <line x1="280" y1="330" x2="268" y2="349"/><line x1="280" y1="330" x2="292" y2="311"/>
+              <line x1="305" y1="330" x2="305" y2="352"/><line x1="305" y1="330" x2="305" y2="308"/>
+            </g>
+          </g>
+          <path d="M300 372 A70 70 0 0 1 210 372" fill="none" stroke="#2f56c9" stroke-width="3.5" marker-end="url(#arw)"/>
+          <text x="255" y="398" text-anchor="middle" font-family="Space Mono, monospace" font-size="13" fill="#2f56c9">spins</text>
+
+          <!-- wires: red (+) and blue (-) -->
+          <path d="M330 191 L235 191 L235 176 L142 176" fill="none" stroke="#e23b3b" stroke-width="3.5"/>
+          <path d="M492 191 L520 191 L520 277 L438 277" fill="none" stroke="#e23b3b" stroke-width="3.5"/>
+          <path d="M330 205 L305 205 L305 265 L352 265" fill="none" stroke="#2f56c9" stroke-width="3.5"/>
+          <path d="M352 291 L320 291 L320 320" fill="none" stroke="#2f56c9" stroke-width="3.5"/>
+
+          <!-- callout leaders -->
+          <g font-family="Space Mono, monospace" font-size="14" fill="#20261f">
+            <line x1="135" y1="146" x2="135" y2="95" stroke="#20261f" stroke-width="1.5"/>
+            <text x="135" y="86" text-anchor="middle">on / off switch</text>
+
+            <line x1="405" y1="163" x2="405" y2="95" stroke="#20261f" stroke-width="1.5"/>
+            <text x="405" y="86" text-anchor="middle">battery = power</text>
+
+            <line x1="640" y1="277" x2="700" y2="277" stroke="#20261f" stroke-width="1.5"/>
+            <text x="705" y="273" text-anchor="start">motor turns</text>
+            <text x="705" y="291" text-anchor="start">the roller</text>
+
+            <line x1="255" y1="418" x2="255" y2="440" stroke="#20261f" stroke-width="1.5"/>
+            <text x="255" y="456" text-anchor="middle">brush sweeps the floor</text>
+          </g>
+
+          <!-- push arrow -->
+          <path d="M650 335 L740 335" stroke="#1c8140" stroke-width="4" marker-end="url(#arw)"/>
+          <text x="695" y="325" text-anchor="middle" font-family="Space Mono, monospace" font-size="13" fill="#1c8140">push →</text>
+        </svg>
+      </div>
+
+      <ol class="steps">
+        <li><b>Switch on.</b> Flip the red I/O switch on the side.</li>
+        <li><b>Power flows.</b> The AA battery pushes electricity through the wires.</li>
+        <li><b>Motor spins.</b> The little motor starts turning fast.</li>
+        <li><b>Brush sweeps.</b> The motor spins the bristle roller, and it sweeps dust and bits up into the box as you push AKATY along.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== INSIDE / COMPARTMENTS ==================== -->
+<section class="band">
+  <div class="wrap reveal">
+    <div class="band-head">
+      <span class="num">02</span>
+      <h2>Look inside</h2>
+    </div>
+    <div class="parts">
+
+      <article class="part">
+        <figure class="snap">
+          <div class="frame">
+            <img src="images/switch.jpg" alt="Red on/off rocker switch"
+                 onerror="this.style.display='none';this.closest('.frame').insertAdjacentHTML('beforeend','&lt;div class=&quot;ph&quot;&gt;drop &lt;b&gt;switch.jpg&lt;/b&gt;&lt;/div&gt;')">
+          </div>
+        </figure>
+        <div>
+          <span class="kind">Compartment · Control</span>
+          <h3>The power switch</h3>
+          <p>A red rocker switch marked I/O sits on the outside wall. Press it to start and stop the whole machine.</p>
+        </div>
+      </article>
+
+      <article class="part">
+        <figure class="snap">
+          <div class="frame">
+            <img src="images/motor-battery.jpg" alt="AA battery in holder wired to a small motor"
+                 onerror="this.style.display='none';this.closest('.frame').insertAdjacentHTML('beforeend','&lt;div class=&quot;ph&quot;&gt;drop &lt;b&gt;motor-battery.jpg&lt;/b&gt;&lt;/div&gt;')">
+          </div>
+        </figure>
+        <div>
+          <span class="kind">Compartment · Engine bay</span>
+          <h3>Battery &amp; motor</h3>
+          <p>An AA battery in a holder feeds a small DC motor through red and blue wires. This is the part that makes everything move.</p>
+        </div>
+      </article>
+
+      <article class="part">
+        <figure class="snap">
+          <div class="frame">
+            <img src="images/brush.jpg" alt="Wooden dowel roller with red foam bristles"
+                 onerror="this.style.display='none';this.closest('.frame').insertAdjacentHTML('beforeend','&lt;div class=&quot;ph&quot;&gt;drop &lt;b&gt;brush.jpg&lt;/b&gt;&lt;/div&gt;')">
+          </div>
+        </figure>
+        <div>
+          <span class="kind">Compartment · Sweeper</span>
+          <h3>The brush roller</h3>
+          <p>A wooden dowel wrapped with red glitter-foam bristles. The motor spins it so it flicks dust and small bits up off the floor.</p>
+        </div>
+      </article>
+
+      <article class="part">
+        <figure class="snap">
+          <div class="frame">
+            <img src="images/dust-cap.jpg" alt="Blue bottle-cap detail on the side of the box"
+                 onerror="this.style.display='none';this.closest('.frame').insertAdjacentHTML('beforeend','&lt;div class=&quot;ph&quot;&gt;drop &lt;b&gt;dust-cap.jpg&lt;/b&gt;&lt;/div&gt;')">
+          </div>
+        </figure>
+        <div>
+          <span class="kind">Compartment · Detail</span>
+          <h3>The side cap</h3>
+          <p>A blue bottle cap, taped neatly to the side, finishes the body and gives AKATY its own little face.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MATERIALS ==================== -->
+<section class="band">
+  <div class="wrap reveal">
+    <div class="band-head">
+      <span class="num">03</span>
+      <h2>What it's made of</h2>
+    </div>
+    <div class="mat-grid" id="matGrid"></div>
+  </div>
+</section>
+
+<!-- ==================== BEHIND THE SCENES ==================== -->
+<section class="band">
+  <div class="wrap reveal">
+    <div class="band-head">
+      <span class="num">04</span>
+      <h2>Behind the scenes</h2>
+    </div>
+    <p class="lede" style="max-width:52ch;margin-top:-14px;margin-bottom:26px">
+      How AKATY came together — from a table full of odds and ends to painted green panels, ready to build.
+    </p>
+    <div class="bts" id="btsGrid"></div>
+  </div>
+</section>
+
+<!-- ==================== MEET THE MAKERS ==================== -->
+<section class="band">
+  <div class="wrap reveal">
+    <div class="band-head">
+      <span class="num">05</span>
+      <h2>Meet the makers</h2>
+    </div>
+    <figure class="snap wide makers-photo" style="--rot:-1.5deg">
+      <div class="frame">
+        <img src="images/team.jpg" alt="The four friends who built AKATY, giving a thumbs up"
+             onerror="this.style.display='none';this.closest('.frame').insertAdjacentHTML('beforeend','&lt;div class=&quot;ph&quot;&gt;drop &lt;b&gt;team.jpg&lt;/b&gt;&lt;/div&gt;')">
+      </div>
+      <figcaption class="cap">The AKATY build crew</figcaption>
+    </figure>
+    <p class="makers-note">Four friends, one box of spare parts, and a machine that really sweeps. Thumbs up all round. 👍</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="wrap">
+    <div class="fm">AKATY Vacuum Cleaner</div>
+    <div class="fn">A handmade invention · scan · sweep · repeat</div>
+  </div>
+</footer>
+
+<script>
+  /* ---- materials list ---- */
+  const check = '<svg viewBox="0 0 16 16"><path d="M2 8.5 L6.5 13 L14 3" fill="none" stroke="#1c8140" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const materials = [
+    ["Recycled cardboard box","the body"],
+    ["Green construction paper","the outer skin"],
+    ["Red glitter foam tape","trim & bristles"],
+    ["Wooden dowel","the roller axle"],
+    ["AA battery + holder","the power"],
+    ["Small DC motor","the engine"],
+    ["Red rocker switch (I/O)","on / off control"],
+    ["Blue bottle cap","the side detail"],
+    ["Red & blue wires","carry the power"],
+    ["Tape & glue","hold it all together"],
+  ];
+  document.getElementById('matGrid').innerHTML = materials.map(m => `
+    <div class="mat">
+      <span class="box">${check}</span>
+      <span><span class="name">${m[0]}</span><span class="role">${m[1]}</span></span>
+    </div>`).join('');
+
+  /* ---- behind the scenes gallery ---- */
+  const shots = [
+    ["workbench.jpg","Gathering the parts"],
+    ["painting.jpg","Painting the panels green"],
+    ["showing-work.jpg","Panels ready to build"],
+  ];
+  document.getElementById('btsGrid').innerHTML = shots.map(s => `
+    <figure class="snap">
+      <div class="frame">
+        <img src="images/${s[0]}" alt="${s[1]}"
+             onerror="this.style.display='none';this.closest('.frame').insertAdjacentHTML('beforeend','&lt;div class=&quot;ph&quot;&gt;drop &lt;b&gt;${s[0]}&lt;/b&gt;&lt;/div&gt;')">
+      </div>
+      <figcaption class="cap">${s[1]}</figcaption>
+    </figure>`).join('');
+
+  /* ---- reveal on scroll ---- */
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
