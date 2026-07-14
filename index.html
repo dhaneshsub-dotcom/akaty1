@@ -258,7 +258,7 @@
     <div class="art">
       <figure class="snap wide" style="--rot:2deg">
         <div class="frame">
-          <img src="images/finished.jpg" alt="The finished AKATY vacuum cleaner"
+          <img src="finished.jpg.jpeg" alt="The finished AKATY vacuum cleaner"
                onerror="this.style.display='none';this.closest('.frame').insertAdjacentHTML('beforeend','&lt;div class=&quot;ph&quot;&gt;PHOTO SLOT&lt;br&gt;drop &lt;b&gt;finished.jpg&lt;/b&gt;&lt;br&gt;in /images&lt;/div&gt;')">
         </div>
         <figcaption class="cap">AKATY, fully assembled</figcaption>
@@ -371,7 +371,7 @@
       <article class="part">
         <figure class="snap">
           <div class="frame">
-            <img src="images/switch.jpg" alt="Red on/off rocker switch"
+            <img src="switch.jpg.jpeg" alt="Red on/off rocker switch"
                  onerror="this.style.display='none';this.closest('.frame').insertAdjacentHTML('beforeend','&lt;div class=&quot;ph&quot;&gt;drop &lt;b&gt;switch.jpg&lt;/b&gt;&lt;/div&gt;')">
           </div>
         </figure>
@@ -385,7 +385,7 @@
       <article class="part">
         <figure class="snap">
           <div class="frame">
-            <img src="images/motor-battery.jpg" alt="AA battery in holder wired to a small motor"
+            <img src="motor-battery.jpg.jpeg" alt="AA battery in holder wired to a small motor"
                  onerror="this.style.display='none';this.closest('.frame').insertAdjacentHTML('beforeend','&lt;div class=&quot;ph&quot;&gt;drop &lt;b&gt;motor-battery.jpg&lt;/b&gt;&lt;/div&gt;')">
           </div>
         </figure>
@@ -399,7 +399,7 @@
       <article class="part">
         <figure class="snap">
           <div class="frame">
-            <img src="images/brush.jpg" alt="Wooden dowel roller with red foam bristles"
+            <img src="brush.jpg.jpeg" alt="Wooden dowel roller with red foam bristles"
                  onerror="this.style.display='none';this.closest('.frame').insertAdjacentHTML('beforeend','&lt;div class=&quot;ph&quot;&gt;drop &lt;b&gt;brush.jpg&lt;/b&gt;&lt;/div&gt;')">
           </div>
         </figure>
@@ -413,7 +413,7 @@
       <article class="part">
         <figure class="snap">
           <div class="frame">
-            <img src="images/dust-cap.jpg" alt="Blue bottle-cap detail on the side of the box"
+            <img src="handle.jpg.jpeg" alt="Blue bottle-cap detail on the side of the box"
                  onerror="this.style.display='none';this.closest('.frame').insertAdjacentHTML('beforeend','&lt;div class=&quot;ph&quot;&gt;drop &lt;b&gt;dust-cap.jpg&lt;/b&gt;&lt;/div&gt;')">
           </div>
         </figure>
@@ -462,7 +462,7 @@
     </div>
     <figure class="snap wide makers-photo" style="--rot:-1.5deg">
       <div class="frame">
-        <img src="images/team.jpg" alt="The four friends who built AKATY, giving a thumbs up"
+        <img src="team.jpg.jpeg" alt="The four friends who built AKATY, giving a thumbs up"
              onerror="this.style.display='none';this.closest('.frame').insertAdjacentHTML('beforeend','&lt;div class=&quot;ph&quot;&gt;drop &lt;b&gt;team.jpg&lt;/b&gt;&lt;/div&gt;')">
       </div>
       <figcaption class="cap">The AKATY build crew</figcaption>
@@ -504,14 +504,14 @@
 
   /* ---- behind the scenes gallery ---- */
   const shots = [
-    ["workbench.jpg","Gathering the parts"],
-    ["painting.jpg","Painting the panels green"],
-    ["showing-work.jpg","Panels ready to build"],
+    ["workbench.jpg.jpeg","Gathering the parts"],
+    ["painting.jpg.jpeg","Painting the panels green"],
+    ["showing-work.jpg.jpeg","Panels ready to build"],
   ];
   document.getElementById('btsGrid').innerHTML = shots.map(s => `
     <figure class="snap">
       <div class="frame">
-        <img src="images/${s[0]}" alt="${s[1]}"
+        <img src="${s[0]}" alt="${s[1]}"
              onerror="this.style.display='none';this.closest('.frame').insertAdjacentHTML('beforeend','&lt;div class=&quot;ph&quot;&gt;drop &lt;b&gt;${s[0]}&lt;/b&gt;&lt;/div&gt;')">
       </div>
       <figcaption class="cap">${s[1]}</figcaption>
